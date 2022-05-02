@@ -18,9 +18,12 @@ WHEN the password is generated
 THEN the password is either displayed in an alert or written to the page
   */
 
-  var passwordLength = prompt("Please enter the length of the password, at least 8 characters and no more than 128 characters", "8");
-  console.log(passwordLength);
-
+  var passwordLength = parseInt(prompt("Please enter the length of the password, at least 8 characters and no more than 128 characters", "8"));
+  console.log(typeof passwordLength, passwordLength); 
+  if(isNaN(passwordLength)){
+    alert('You must enter a real number')
+    passwordLength = parseInt(prompt("Please enter the length of the password, at least 8 characters and no more than 128 characters", "8"));
+  }
   var includeLowerCase = confirm("Press OK, to include lowercase letters");
   console.log(includeLowerCase);
 
@@ -45,7 +48,7 @@ THEN the password is either displayed in an alert or written to the page
     includeSpecialCharacters = confirm("Press Ok, to include Special characters");
   }
   var aplhabetList = ""; 
-  var password; 
+  var password = ""; 
 
   if(includeLowerCase === true){
     aplhabetList = aplhabetList + "abcdefghijklmnopqrstuvwxyz"
@@ -59,11 +62,14 @@ THEN the password is either displayed in an alert or written to the page
   if(includeSpecialCharacters === true){
     aplhabetList = aplhabetList + "!@#$%^&*?_"
   }
+  aplhabetList = aplhabetList.split("");
   console.log(aplhabetList);
 
   //FOR Loop based on the passwordLength 
   for (let i = 0; i < passwordLength; i++) {
-     console.log(i); 
+    var randomNumber = Math.floor(Math.random()*aplhabetList.length);
+    console.log(randomNumber);
+    password = password + aplhabetList[randomNumber];
   }
   //Inside the loop ,call Math.floor(math.random to generate random lettter \)
 
